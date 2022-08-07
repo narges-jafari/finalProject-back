@@ -1,0 +1,7 @@
+{
+    "env":{
+        "MONGO_USER":"jafari",
+        "MONGO_PASSWORD":"safar",
+        "MONGO_DB":"tripno"
+    }
+}
