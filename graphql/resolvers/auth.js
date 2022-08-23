@@ -15,10 +15,9 @@ module.exports = {
         username: args.userInput.username,
         email: args.userInput.email,
         password: hashPassword,
-        firstName: args.userInput.firstName,
-        lastName: args.userInput.lastName,
-        phoneNumber: args.userInput.phoneNumber
-
+        fullName: args.userInput.fullName,
+        birthdate: args.userInput.birthdate,
+        nationalcode: args.userInput.nationalcode
       })
       const result = await user.save()
       return { ...result._doc, password: null, _id: result.id }
@@ -26,19 +25,18 @@ module.exports = {
       throw err
     }
   },
-  login: async ({ email, password }) => {
-    const user = await User.findOne({ email })
-    if (!user) {
-      throw new Error('user is not ')
-    }
+  user: async ({userId})  => { 
+    const user = await User.findOne({_id:userId.toString()})
+    return { userId: user._id ,username:user.username }
+  }
+  ,
+  login: async ({ username, password }) => { 
+    const user = await User.findOne({ username })
     const isEqual = await bcrypt.compare(password, user.password)
-
-    if (!isEqual) {
-      throw new Error('password id wrong')
-    }
-    const token = jwt.sign({ userId: user.id, email: user.email }, 'somesuprtkey', {
+      const token = jwt.sign({ userId: user.id, username: user.username }, 'somesuprtkey', {
       expiresIn: '1h'
     })
     return { userId: user.id, token, tokenExpiration: 1 }
   }
+
 }

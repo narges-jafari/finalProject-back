@@ -17,7 +17,12 @@ const flightSchema = new Schema({
     type: String,
     required: true
   },
-  time: {
+  departureTime: {
+    type: String,
+    required: true
+
+  },
+  arrivalTime: {
     type: String,
     required: true
 
@@ -48,6 +53,21 @@ const flightSchema = new Schema({
 
   },
   price: {
+    type: Number,
+    required: true
+
+  },
+  airplaneModel: {
+    type: String,
+    required: true
+
+  },
+  allowedLoggage: {
+    type: Number,
+    required: true
+
+  },
+  airline: {
     type: String,
     required: true
 

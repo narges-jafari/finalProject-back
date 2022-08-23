@@ -10,13 +10,17 @@ type Flight{
   destinationName: String!
 price: Float!
 flightClass:String!
-time:String!
+airline:String!
+departureTime:String!
+arrivalTime:String!
 capacity:Int!
 flightNumber:Int!
 airportOrigin:String!
 airportDestination:String!
 information:String!
 date:String!
+airplaneModel:String!
+allowedLoggage:Int!
 creator:User!
 }
 type Train{
@@ -67,10 +71,10 @@ type User{
   _id:ID!
   email :String!
   password: String
-  firstName : String!
-  lastName : String!
-  phoneNumber : String!
+  fullName : String!
   username:String!
+  birthdate:String!
+  nationalcode:String!
 
 }
 
@@ -85,13 +89,19 @@ input FlightInput{
   destinationName: String!
 price: Float!
 flightClass:String!
-time:String!
+airline:String!
+departureTime:String!
+arrivalTime:String!
 capacity:Int!
 flightNumber:Int!
 airportOrigin:String!
 airportDestination:String!
 information:String!
 date:String!
+airplaneModel:String!
+allowedLoggage:Int!
+
+
 
 }
 input TrainInput{
@@ -135,17 +145,19 @@ input UserInput{
 email:String!
 username:String!
 password:String!
-firstName : String!
-lastName : String!
-phoneNumber : String!
+fullName : String!
+birthdate : String!
+nationalcode : String!
 }
+
 
 type RootQuery{
   flights:[Flight!]!
   trains:[Train!]!
   buses:[Bus!]!
   hotels:[Hotel!]!
-  login(email:String!, password:String!):AuthData!
+  login(username:String!, password:String!):AuthData!
+  user(userId:String):User!
 
 }
 

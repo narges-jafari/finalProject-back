@@ -25,13 +25,17 @@ module.exports = {
       destinationName: args.flightInput.destinationName,
       price: args.flightInput.price,
       flightClass: args.flightInput.flightClass,
-      time: args.flightInput.time,
+      airline:args.flightInput.airline,
       capacity: args.flightInput.capacity,
       flightNumber: args.flightInput.flightNumber,
       airportOrigin: args.flightInput.airportOrigin,
       airportDestination: args.flightInput.airportDestination,
       information: args.flightInput.information,
       date: dateToString(args.flightInput.date),
+      airplaneModel:args.flightInput.airplaneModel,
+      arrivalTime:args.flightInput.arrivalTime,
+      allowedLoggage:args.flightInput.allowedLoggage,
+      departureTime:args.flightInput.departureTime,
       creator: '62ebac44e2492fd084f4454c'
     })
     let createdFlight

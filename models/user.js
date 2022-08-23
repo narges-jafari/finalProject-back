@@ -13,15 +13,16 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  firstName: {
+  fullName: {
     type: String,
     required: true
   },
-  lastName: {
+  birthdate: {
     type: String,
     required: true
+
   },
-  phoneNumber: {
+  nationalcode: {
     type: String,
     required: true
 
