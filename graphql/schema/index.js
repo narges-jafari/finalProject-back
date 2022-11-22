@@ -9,18 +9,6 @@ type Flight{
   originName:String! ,
   destinationName: String!
 price: Float!
-flightClass:String!
-airline:String!
-departureTime:String!
-arrivalTime:String!
-capacity:Int!
-flightNumber:Int!
-airportOrigin:String!
-airportDestination:String!
-information:String!
-date:String!
-airplaneModel:String!
-allowedLoggage:Int!
 creator:User!
 }
 type Train{
@@ -88,20 +76,6 @@ input FlightInput{
   originName:String! 
   destinationName: String!
 price: Float!
-flightClass:String!
-airline:String!
-departureTime:String!
-arrivalTime:String!
-capacity:Int!
-flightNumber:Int!
-airportOrigin:String!
-airportDestination:String!
-information:String!
-date:String!
-airplaneModel:String!
-allowedLoggage:Int!
-
-
 
 }
 input TrainInput{

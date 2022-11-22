@@ -24,26 +24,26 @@ module.exports = {
       originName: args.flightInput.originName,
       destinationName: args.flightInput.destinationName,
       price: args.flightInput.price,
-      flightClass: args.flightInput.flightClass,
-      airline:args.flightInput.airline,
-      capacity: args.flightInput.capacity,
-      flightNumber: args.flightInput.flightNumber,
-      airportOrigin: args.flightInput.airportOrigin,
-      airportDestination: args.flightInput.airportDestination,
-      information: args.flightInput.information,
-      date: dateToString(args.flightInput.date),
-      airplaneModel:args.flightInput.airplaneModel,
-      arrivalTime:args.flightInput.arrivalTime,
-      allowedLoggage:args.flightInput.allowedLoggage,
-      departureTime:args.flightInput.departureTime,
-      creator: '62ebac44e2492fd084f4454c'
+      // flightClass: args.flightInput.flightClass,
+      // airline:args.flightInput.airline,
+      // capacity: args.flightInput.capacity,
+      // flightNumber: args.flightInput.flightNumber,
+      // airportOrigin: args.flightInput.airportOrigin,
+      // airportDestination: args.flightInput.airportDestination,
+      // information: args.flightInput.information,
+      // date: dateToString(args.flightInput.date),
+      // airplaneModel:args.flightInput.airplaneModel,
+      // arrivalTime:args.flightInput.arrivalTime,
+      // allowedLoggage:args.flightInput.allowedLoggage,
+      // departureTime:args.flightInput.departureTime,
+      creator: req.userId
     })
     let createdFlight
     try {
       const result = await flight
         .save()
       createdFlight = trasformFlight(result)
-      const creator = await User.findById('62ebac44e2492fd084f4454c')
+      const creator = await User.findById(result._doc.creator.toString())
       if (!creator) {
         throw new Error('user not found')
       }

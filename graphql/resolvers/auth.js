@@ -30,13 +30,21 @@ module.exports = {
     return { userId: user._id ,username:user.username }
   }
   ,
-  login: async ({ username, password }) => { 
-    const user = await User.findOne({ username })
-    const isEqual = await bcrypt.compare(password, user.password)
-      const token = jwt.sign({ userId: user.id, username: user.username }, 'somesuprtkey', {
-      expiresIn: '1h'
-    })
-    return { userId: user.id, token, tokenExpiration: 1 }
+  login:async ({username,password}) =>{
+    const user = await User.findOne({username:username})
+    if(!user){
+        throw new Error('user is not ')
+    }
+const isEqual= await bcrypt.compare(password, user.password)
+
+if(!isEqual){
+    throw new Error ('password id wrong')
+}
+const token = jwt.sign({userId:user.id, username:user.username},'somesuprtkey',{
+    expiresIn:'1h'
+})
+return {userId:user.id, token:token,tokenExpiration:1}
+}
   }
 
-}
+
