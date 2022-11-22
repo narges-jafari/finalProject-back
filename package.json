@@ -2,7 +2,7 @@
   "name": "safarbackend",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://github.com/narges-jafari/finalProject-back.git",
+  "homepage": "https://github.com/narges-jafari/front.git",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "-": "^0.0.1",
     "@graphql-tools/schema": "^8.5.1",
     "apollo-server-core": "^3.10.0",
     "apollo-server-express": "^3.10.0",
@@ -20,6 +21,7 @@
     "express": "^4.18.1",
     "graphql-subscriptions": "^2.0.0",
     "graphql-ws": "^5.9.1",
+    "save-dev": "^0.0.1-security",
     "standard": "^17.0.0",
     "ws": "^8.8.1"
   },

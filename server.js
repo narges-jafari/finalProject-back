@@ -8,6 +8,7 @@ const graphQlResolvers = require('./graphql/resolvers/index')
 const isAuth = require('./middleware/is-auth')
 
 const app = express()
+app.use(isAuth)
 
 app.use(bodyParser.json())
 app.use((req, res, next) => {
@@ -20,7 +21,6 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(isAuth)
 
 app.use('/graphql', graphqlHTTP({
   schema: graphQlSchema,
