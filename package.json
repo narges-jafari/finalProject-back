@@ -2,7 +2,7 @@
   "name": "safarbackend",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://github.com/narges-jafari/front.git",
+  "homepage": "https://github.com/narges-jafari/finalProject-back.git",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
