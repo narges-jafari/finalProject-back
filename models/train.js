@@ -9,24 +9,38 @@ const trainSchema = new Schema({
     type: String,
     required: true
   },
-  //   createEvents: [{
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'Event'
-  //   }]
   date: {
     type: String,
     required: true
+  },
+  departureTime: {
+    type: String,
+    required: true
+
+  },
+  arrivalTime: {
+    type: String,
+    required: true
+
+  },
+  hallNumber:{
+    type:Number,
+    require:true
   },
   // شرکت ریلی
   railCompany: {
     type: String,
     required: true
   },
-  time: {
-    type: String,
+  hallType:{
+    type:String,
     required: true
-
   },
+  hallDegree:{
+    type:Number,
+    required: true
+  },
+
   capacity: {
     type: String,
     required: true
@@ -48,7 +62,7 @@ const trainSchema = new Schema({
 
   },
   information: {
-    type: String,
+    type: Object,
     required: true
 
   },
@@ -60,7 +74,11 @@ const trainSchema = new Schema({
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }
+  },
+  seats:[{
+    type: Schema.Types.ObjectId,
+    ref: 'SeatNumber'
+   }]
 
 })
 module.exports = mongoose.model('Train', trainSchema)

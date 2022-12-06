@@ -9,7 +9,7 @@ module.exports = {
     try {
       const trains = await Train.find()
       return trains.map(train => {
-        return trasformtrain(train)
+        return trasformTrain(train)
       })
     } catch (err) {
       throw err
@@ -17,7 +17,7 @@ module.exports = {
   },
   createTrain: async (args, req) => {
     if (!req.isAuth) {
-      throw new Error('not login ')
+      // throw new Error('not login ')
     }
 
     const train = new Train({
@@ -25,7 +25,8 @@ module.exports = {
         destinationName: args.trainInput.destinationName,
         price: args.trainInput.price,
         railCompany: args.trainInput.railCompany,
-        time: args.trainInput.time,
+        arrivalTime: args.trainInput.arrivalTime,
+        departureTime:args.trainInput.departureTime,
         capacity: args.trainInput.capacity,
         trainNumber: args.trainInput.trainNumber,
         railwayOrigin: args.trainInput.railwayOrigin,

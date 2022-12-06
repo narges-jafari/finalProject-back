@@ -9,8 +9,70 @@ type Flight{
   originName:String! ,
   destinationName: String!
 price: Float!
+date:String!
+flightClass:String!
+departureTime:String!
+arrivalTime:String!
+flightNumber:Int!
+airportOrigin:String!
+airportDestination:String!
+information:[String!]
+airplaneModel:String!
+allowedLoggage:Int!
+airline:String!
+capacity:Int!
+airplaneCompany:String!
 creator:User!
 }
+
+input FlightInput{
+  originName:String! ,
+  destinationName: String!
+price: Float!
+date:String!
+flightClass:String!
+departureTime:String!
+arrivalTime:String!
+flightNumber:Int!
+airportOrigin:String!
+airportDestination:String!
+information:[String!]
+airplaneModel:String!
+allowedLoggage:Int!
+airline:String!
+capacity:Int!
+airplaneCompany:String!
+creator:String!
+
+}
+input searchFlightInput{
+  originName:String!
+  
+}
+
+type SeatNumber{
+  _id: ID!
+  number:Int
+  state:Int
+  trainCompartment:Int
+  isDelete:Boolean!
+  flight:Flight!
+
+}
+
+input SeatNumberInput{
+  number:Int
+  state:Int
+  trainCompartment:Int
+  flight:String
+
+
+}
+
+
+
+
+
 type Train{
   _id: ID!
   originName:String!
@@ -72,12 +134,7 @@ type AuthData{
   tokenExpiration:Int!
 }
 
-input FlightInput{
-  originName:String! 
-  destinationName: String!
-price: Float!
 
-}
 input TrainInput{
   originName:String!
       destinationName: String!
@@ -130,8 +187,10 @@ type RootQuery{
   trains:[Train!]!
   buses:[Bus!]!
   hotels:[Hotel!]!
+  seatNumbers:[SeatNumber!]!
   login(username:String!, password:String!):AuthData!
-  user(userId:String):User!
+  user(creator:String):User!
+  searchFlight(originName:String!,destinationName:String!,flightClass:String!,date:String!):[Flight]
 
 }
 
@@ -141,8 +200,7 @@ type RootMutation{
   createBus(busInput:BusInput!) : Bus
   createUser(userInput:UserInput!) : User
   createHotel(hotelInput:HotelInput): Hotel
-
-
+  addSeatNumber(seatnumberInput:SeatNumberInput!): SeatNumber
 
 }
 

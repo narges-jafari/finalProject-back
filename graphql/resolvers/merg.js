@@ -2,11 +2,10 @@ const Flight = require('../../models/flight')
 const Train = require('../../models/train')
 const Bus = require('../../models/bus')
 const Hotel = require('../../models/hotel')
-
-
-
+const SeatNumber = require('../../models/seatNumber')
 const User = require('../../models/user')
 const { dateToString } = require('../../helpers/date')
+
 
 const trasformFlight = async flight => {
   return {
@@ -16,6 +15,13 @@ const trasformFlight = async flight => {
     creator: user.bind(this, flight._doc.creator)
   }
 }
+const trasformFlights = async flight => {
+  return {
+    ...flight._doc,
+    _id: flight.id,
+  }
+}
+
 
 const trasformTrain = async train => {
   return {
@@ -52,6 +58,36 @@ const flights = async flightId => {
     throw err
   }
 }
+// const searchFlight = async (originName,destinationName,date,flightClas) => {
+//   try {
+//     const flights = await Flight.find({ originName: { $in: originName },destinationName:{$in:destinationName},
+//     date:{$in:date},flightClass:{$in:flightClas} })
+//     return flights.map(flight => {
+//       return trasformFlights(flight)
+//     })
+//   } catch (err) {
+//     throw err
+//   }
+// }
+const trasformSeatNumber = async seatnumber => {
+  return {
+    ...seatnumber._doc,
+    _id: seatnumber.id,
+    flight: flightInfo.bind(this, seatnumber._doc.flight)
+  }
+}
+
+const seatnumbers = async seatnumberId => {
+  try {
+    const seatnumbers = await SeatNumber.find({ _id: { $in: seatnumberId } })
+    return seatnumbers.map(seatnumber => {
+      return trasformSeatNumber(seatnumber)
+    })
+  } catch (err) {
+    throw err
+  }
+}
+
 const trains = async trainId => {
   try {
     const trains = await Train.find({ _id: { $in: trainId } })
@@ -114,8 +150,25 @@ const user = async userId => {
     throw err
   }
 }
+
+
+const flightInfo = async flightInfoId => {
+  try {
+    const flightInfo = await Flight.findById(flightInfoId)
+
+    return {
+      ...flightInfo._doc,
+      _id: flightInfo.id,
+      seats: seatnumbers.bind(this, flightInfo._doc.seats),
+    }
+  } catch (err) {
+    throw err
+  }
+}
 exports.trasformFlight = trasformFlight
 exports.trasformTrain = trasformTrain
 exports.trasformBus = trasformBus
 exports.trasformHotel = trasformHotel
+exports.trasformSeatNumber = trasformSeatNumber
+exports.trasformFlights=trasformFlights
 

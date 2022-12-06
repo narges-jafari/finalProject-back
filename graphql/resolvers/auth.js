@@ -25,9 +25,9 @@ module.exports = {
       throw err
     }
   },
-  user: async ({userId})  => { 
-    const user = await User.findOne({_id:userId.toString()})
-    return { userId: user._id ,username:user.username }
+  user: async ({creator})  => { 
+    const user = await User.findOne({_id:creator.toString()})
+    return { creator: user._id ,username:user.username }
   }
   ,
   login:async ({username,password}) =>{
