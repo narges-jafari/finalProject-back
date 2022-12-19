@@ -19,7 +19,6 @@ airportDestination:String!
 information:[String!]
 airplaneModel:String!
 allowedLoggage:Int!
-airline:String!
 capacity:Int!
 airplaneCompany:String!
 creator:User!
@@ -39,12 +38,15 @@ airportDestination:String!
 information:[String!]
 airplaneModel:String!
 allowedLoggage:Int!
-airline:String!
 capacity:Int!
 airplaneCompany:String!
 creator:String!
 
 }
+
+
+
+
 input searchFlightInput{
   originName:String!
   
@@ -191,6 +193,7 @@ type RootQuery{
   login(username:String!, password:String!):AuthData!
   user(creator:String):User!
   searchFlight(originName:String!,destinationName:String!,flightClass:String!,date:String!):[Flight]
+  searchFlightbyId(id:ID!):Flight!
 
 }
 

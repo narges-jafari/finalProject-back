@@ -10,14 +10,19 @@
       type: String,
       required: true
     },
+    capacity:{
+      type: Number,
+      required: true
+    },
+  
+    date: {
+      type: String,
+      required: true
+    },
     price: {
       type: Number,
       required: true
   
-    },
-    date: {
-      type: String,
-      required: true
     },
     flightClass: {
       type: String,
@@ -63,15 +68,7 @@
       required: true
   
     },
-    airline: {
-      type: String,
-      required: true
-  
-    },
-    capacity:{
-      type: Number,
-      required: true
-    },
+
     airplaneCompany: {
       type: String,
       required: true

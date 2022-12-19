@@ -1,1 +1,1 @@
-exports.dateToString = date => new Date(date)
+exports.dateToString = date => new Date()

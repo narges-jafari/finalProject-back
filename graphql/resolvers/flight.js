@@ -21,6 +21,22 @@ module.exports = {
     return flight
    
 },
+// searchFlightbyId: async ( args) => {
+//   const flight= await Flight.findById(args._id)
+//   return flight
+// },
+searchFlightbyId: async (args) => {
+  // await connect();
+  const result = await Flight.findById(args.id).then((res) => {
+      if (res) {
+          return res;
+      }
+  })
+  return result;
+
+
+},
+
 
   createFlight: async (args, req) => {
     if (req.isAuth) {
@@ -31,18 +47,17 @@ module.exports = {
       originName: args.flightInput.originName,
       destinationName: args.flightInput.destinationName,
       price: args.flightInput.price,
-      date: dateToString(args.flightInput.date),
+      date: args.flightInput.date,
+      capacity:args.flightInput.capacity,
+      arrivalTime:args.flightInput.arrivalTime,
+      departureTime:args.flightInput.departureTime,
       flightClass: args.flightInput.flightClass,
-      arrivalTime:timeToString(args.flightInput.arrivalTime),
-      departureTime:timeToString(args.flightInput.departureTime),
       flightNumber: args.flightInput.flightNumber,
       airportOrigin: args.flightInput.airportOrigin,
       airportDestination: args.flightInput.airportDestination,
-      airline:args.flightInput.airline,
       information: args.flightInput.information,
       airplaneModel:args.flightInput.airplaneModel,
       allowedLoggage:args.flightInput.allowedLoggage,
-      capacity:args.flightInput.capacity,
       airplaneCompany:args.flightInput.airplaneCompany,
       creator: args.flightInput.creator,
     })
