@@ -3,10 +3,9 @@ const flightResolver = require('./flight')
 const trainResolver = require('./train')
 const busResolver = require('./bus')
 const hotelResolver = require('./hotel')
-const seatNumberResolver=require('./seatNumber')
-const uploadfileResolver=require('./uploadfile')
-
-// const bookingResolver =require('./booking')
+const hotelRoomResolver = require('./room')
+const seatNumberResolver = require('./seatNumber')
+const seatNumberTrainResolver = require('./trainSeatNumbers')
 
 const rootRsolver = {
   ...authResolver,
@@ -15,7 +14,8 @@ const rootRsolver = {
   ...busResolver,
   ...hotelResolver,
   ...seatNumberResolver,
-  ...uploadfileResolver
+  ...seatNumberTrainResolver,
+  ...hotelRoomResolver,
 }
 
 module.exports = rootRsolver

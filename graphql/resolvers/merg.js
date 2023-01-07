@@ -3,22 +3,126 @@ const Train = require('../../models/train')
 const Bus = require('../../models/bus')
 const Hotel = require('../../models/hotel')
 const SeatNumber = require('../../models/seatNumber')
+const SeatNumberTrain = require('../../models/seatNumberTrain')
+const Room = require('../../models/room')
+const HotelBuying =require('../../models/hotelBuy')
+const AirplaneBuying=require('../../models/airplaneBuying')
 const User = require('../../models/user')
-const { dateToString } = require('../../helpers/date')
-
+// const { dateToString } = require('../../helpers/date')
 
 const trasformFlight = async flight => {
   return {
     ...flight._doc,
     _id: flight.id,
-    date: dateToString(flight._doc.date),
+    date: flight._doc.date,
     creator: user.bind(this, flight._doc.creator)
   }
 }
-const trasformFlights = async flight => {
-  return {
+
+const trasformBuyHotel=async  hotel=>{
+  return{
+    ...hotel._doc,
+    _id:hotel.id,
+    user: user.bind(this,hotel._doc.user),
+    room: singleRoom.bind(this,hotel._doc.room),
+    hotel: singleHotel.bind(this,hotel._doc.hotel),    
+  }
+
+}
+
+const trasformBuyFlight=async  flight=>{
+  return{
     ...flight._doc,
-    _id: flight.id,
+    _id:flight.id,
+    user: user.bind(this,flight._doc.user),
+    flight: singleFlight.bind(this,flight._doc.flight),    
+  }
+
+}
+
+// const singleHotel = async hotelId =>{
+//   try{
+//     const hotel= await Hotel.findById(hotelId)
+//     return trasformHotel(hotel)
+
+//   }catch(err){
+//     throw err
+//   }
+// }
+
+const singleFlight = async flightId =>{
+  try{
+    const flight= await Flight.findById(flightId)
+    return trasformFlight(flight)
+
+  }catch(err){
+    throw err
+  }
+}
+
+
+
+
+
+const trasformTicketHotel=async  buy=>{
+  return{
+    ...buy._doc,
+    _id:buy.id,
+    hotelBuy: singlehotelBuy.bind(this,buy._doc.hotelBuy),    
+  }
+}
+
+
+
+
+const singlehotelBuy = async hotelId =>{
+  try{
+    const hotelRoom= await HotelBuying.findById(hotelId)
+    return trasformBuyHotel(hotelRoom)
+
+  }catch(err){
+    throw err
+  }
+}
+
+
+const trasformTicketFlight=async  buy=>{
+  return{
+    ...buy._doc,
+    _id:buy.id,
+    flightBuy: singleflightBuy.bind(this,buy._doc.flightBuy),    
+  }
+}
+
+const singleflightBuy = async flightId =>{
+  try{
+    const flight= await AirplaneBuying.findById(flightId)
+    return trasformBuyFlight(flight)
+
+  }catch(err){
+    throw err
+  }
+}
+
+
+
+
+const singleRoom = async roomId =>{
+  try{
+    const room= await Room.findById(roomId)
+    return trasformRoom(room)
+
+  }catch(err){
+    throw err
+  }
+}
+const singleHotel = async hotelId =>{
+  try{
+    const hotel= await Hotel.findById(hotelId)
+    return trasformHotel(hotel)
+
+  }catch(err){
+    throw err
   }
 }
 
@@ -27,7 +131,7 @@ const trasformTrain = async train => {
   return {
     ...train._doc,
     _id: train.id,
-    date: dateToString(train._doc.date),
+    date: train._doc.date,
     creator: user.bind(this, train._doc.creator)
   }
 }
@@ -35,7 +139,7 @@ const trasformBus = async bus => {
   return {
     ...bus._doc,
     _id: bus.id,
-    date: dateToString(bus._doc.date),
+    date: bus._doc.date,
     creator: user.bind(this, bus._doc.creator)
   }
 }
@@ -44,7 +148,6 @@ const trasformHotel = async hotel => {
   return {
     ...hotel._doc,
     _id: hotel.id,
-    date: dateToString(hotel._doc.date),
     creator: user.bind(this, hotel._doc.creator)
   }
 }
@@ -58,17 +161,7 @@ const flights = async flightId => {
     throw err
   }
 }
-// const searchFlight = async (originName,destinationName,date,flightClas) => {
-//   try {
-//     const flights = await Flight.find({ originName: { $in: originName },destinationName:{$in:destinationName},
-//     date:{$in:date},flightClass:{$in:flightClas} })
-//     return flights.map(flight => {
-//       return trasformFlights(flight)
-//     })
-//   } catch (err) {
-//     throw err
-//   }
-// }
+
 const trasformSeatNumber = async seatnumber => {
   return {
     ...seatnumber._doc,
@@ -87,7 +180,50 @@ const seatnumbers = async seatnumberId => {
     throw err
   }
 }
+const flightInfo = async flightInfoId => {
+  try {
+    const flightInfo = await Flight.findById(flightInfoId)
 
+    return {
+      ...flightInfo._doc,
+      _id: flightInfo.id,
+      seats: seatnumbers.bind(this, flightInfo._doc.seats)
+    }
+  } catch (err) {
+    throw err
+  }
+}
+const trasformRoom = async room => {
+  return {
+    ...room._doc,
+    _id: room.id,
+    hotel: hotelInfo.bind(this, room._doc.hotel)
+  }
+}
+
+const roomsInfo = async roomId => {
+  try {
+    const rooms = await Room.find({ _id: { $in: roomId } })
+    return rooms.map(room => {
+      return trasformRoom(room)
+    })
+  } catch (err) {
+    throw err
+  }
+}
+const hotelInfo = async hotelInfoId => {
+  try {
+    const hotelInfo = await Hotel.findById(hotelInfoId)
+
+    return {
+      ...hotelInfo._doc,
+      _id: hotelInfo.id,
+      rooms: roomsInfo.bind(this, hotelInfo._doc.rooms)
+    }
+  } catch (err) {
+    throw err
+  }
+}
 const trains = async trainId => {
   try {
     const trains = await Train.find({ _id: { $in: trainId } })
@@ -120,16 +256,6 @@ const hotels = async hotelId => {
   }
 }
 
-//   const singleFlights = async flightId =>{
-//     try{
-//       const flight= await Flight.findById(flightId)
-//       return trasformFlight(flight)
-
-//     }catch(err){
-//       throw err
-//     }
-//   }
-
 const user = async userId => {
   try {
     const user = await User.findById(userId)
@@ -142,33 +268,51 @@ const user = async userId => {
       createBuses: buses.bind(this, user._doc.createBuses),
       createHotels: hotels.bind(this, user._doc.createHotels)
 
-
-
-
     }
   } catch (err) {
     throw err
   }
 }
+const trasformSeatNumberTrain = async seatnumberTrain => {
+  return {
+    ...seatnumberTrain._doc,
+    _id: seatnumberTrain.id,
+    train: trainInfo.bind(this, seatnumberTrain._doc.train)
+  }
+}
 
-
-const flightInfo = async flightInfoId => {
+const seatnumbersTrain = async seatnumberId => {
   try {
-    const flightInfo = await Flight.findById(flightInfoId)
+    const seatnumbers = await SeatNumberTrain.find({ _id: { $in: seatnumberId } })
+    return seatnumbers.map(seatnumber => {
+      return trasformSeatNumberTrain(seatnumber)
+    })
+  } catch (err) {
+    throw err
+  }
+}
+const trainInfo = async trainInfoId => {
+  try {
+    const trainInfo = await Train.findById(trainInfoId)
 
     return {
-      ...flightInfo._doc,
-      _id: flightInfo.id,
-      seats: seatnumbers.bind(this, flightInfo._doc.seats),
+      ...trainInfo._doc,
+      _id: trainInfo.id,
+      seats: seatnumbersTrain.bind(this, trainInfo._doc.seats)
     }
   } catch (err) {
     throw err
   }
 }
+
 exports.trasformFlight = trasformFlight
 exports.trasformTrain = trasformTrain
 exports.trasformBus = trasformBus
 exports.trasformHotel = trasformHotel
 exports.trasformSeatNumber = trasformSeatNumber
-exports.trasformFlights=trasformFlights
-
+exports.trasformSeatNumberTrain = trasformSeatNumberTrain
+exports.trasformRoom = trasformRoom
+exports.trasformBuyHotel=trasformBuyHotel
+exports.trasformTicketHotel=trasformTicketHotel
+exports.trasformBuyFlight=trasformBuyFlight
+exports.trasformTicketFlight=trasformTicketFlight

@@ -13,19 +13,9 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  fullName: {
+  role: {
     type: String,
     required: true
-  },
-  birthdate: {
-    type: String,
-    required: true
-
-  },
-  nationalcode: {
-    type: String,
-    required: true
-
   },
   createFlights: [{
     type: Schema.Types.ObjectId,
