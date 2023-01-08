@@ -39,7 +39,6 @@ module.exports = {
       throw err
     }
   },
-<<<<<<< HEAD
   searchTrainTicketById: async (args) => {
     const result = await TrainTicket.findById(args.id).then((res) => {
       if (res) {
@@ -65,8 +64,6 @@ console.log('yes',no)
 )
       
     },
-=======
->>>>>>> 860eb8492d6f0aaaba5664bb560ac201509f560c
   searchTrainbyName: async ({ originName }) => {
     try {
       const trains = await Train.find({ originName })

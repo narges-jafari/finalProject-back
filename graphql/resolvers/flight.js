@@ -49,28 +49,6 @@ module.exports = {
     })
     return result
   },
-<<<<<<< HEAD
-
-  allFlightTicket: async () => {
-    const results = await FlightTicket.find()
-    return results.slice(-1).map(hotel => {
-      return trasformTicketFlight(hotel)
-    })
-  },
-  searchFlightTicketByUserId: async ({userId}) => {
-
-    const results = await FlightTicket.find({ userId })
-if(results){
-return results.map(hotel => {
-  return trasformTicketFlight(hotel)
-})
-}else return(
-console.log('yes',no)
-)
-      
-    },
-=======
->>>>>>> 860eb8492d6f0aaaba5664bb560ac201509f560c
   searchFlightTicketById: async (args) => {
     const result = await FlightTicket.findById(args.id).then((res) => {
       if (res) {
@@ -84,6 +62,19 @@ console.log('yes',no)
     }else return(
 null)
   },
+
+  searchFlightTicketByUserId: async ({userId}) => {
+
+    const results = await FlightTicket.find({ userId })
+if(results){
+  return results.slice(-1).map(train => {
+    return trasformTicketFlight(train)
+  })
+}else return(
+console.log('yes',no)
+)
+      
+    },
 
 
 
@@ -167,7 +158,6 @@ const ticket =new FlightTicket({
 })
 const result= await ticket.save()
 return trasformTicketFlight(result)
-<<<<<<< HEAD
 
 
 
@@ -183,21 +173,4 @@ updateFlightCapacity: async (args) => {
 },
 
 
-=======
-
-
-
-},
-updateFlightCapacity: async (args) => {
-  const result=await Flight.findOneAndUpdate({_id:args.id  },{capacity:args.capacity},{new:true}).then((res) => {
-    if (res) {
-      return res
-    }
-  })
-  return result
-
-},
-
-
->>>>>>> 860eb8492d6f0aaaba5664bb560ac201509f560c
 }
