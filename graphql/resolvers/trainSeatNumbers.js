@@ -13,6 +13,7 @@ module.exports = {
       throw err
     }
   },
+<<<<<<< HEAD
   getTrainSeatnumber:async({train,isDelete})=>{
     try {
       const trains = await SeatNumberTrain.find({train,isDelete})
@@ -23,6 +24,8 @@ module.exports = {
       throw err
     }
   },
+=======
+>>>>>>> 860eb8492d6f0aaaba5664bb560ac201509f560c
 
   addSeatNumberTrain: async (args, req) => {
     if (req.isAuth) {
@@ -55,6 +58,7 @@ module.exports = {
     } catch (err) {
       throw err
     }
+<<<<<<< HEAD
   },  
   reservedtraintSeat: async (args) => {
     const result=await SeatNumberTrain.updateMany({_id:args.id  },{isDelete:args.isDelete},{new:true}).then((res) => {
@@ -66,4 +70,7 @@ module.exports = {
   
   
   },
+=======
+  }
+>>>>>>> 860eb8492d6f0aaaba5664bb560ac201509f560c
 }

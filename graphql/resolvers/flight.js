@@ -49,6 +49,7 @@ module.exports = {
     })
     return result
   },
+<<<<<<< HEAD
 
   allFlightTicket: async () => {
     const results = await FlightTicket.find()
@@ -68,6 +69,8 @@ console.log('yes',no)
 )
       
     },
+=======
+>>>>>>> 860eb8492d6f0aaaba5664bb560ac201509f560c
   searchFlightTicketById: async (args) => {
     const result = await FlightTicket.findById(args.id).then((res) => {
       if (res) {
@@ -164,6 +167,7 @@ const ticket =new FlightTicket({
 })
 const result= await ticket.save()
 return trasformTicketFlight(result)
+<<<<<<< HEAD
 
 
 
@@ -179,4 +183,21 @@ updateFlightCapacity: async (args) => {
 },
 
 
+=======
+
+
+
+},
+updateFlightCapacity: async (args) => {
+  const result=await Flight.findOneAndUpdate({_id:args.id  },{capacity:args.capacity},{new:true}).then((res) => {
+    if (res) {
+      return res
+    }
+  })
+  return result
+
+},
+
+
+>>>>>>> 860eb8492d6f0aaaba5664bb560ac201509f560c
 }

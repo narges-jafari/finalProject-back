@@ -7,8 +7,11 @@ const SeatNumberTrain = require('../../models/seatNumberTrain')
 const Room = require('../../models/room')
 const HotelBuying =require('../../models/hotelBuy')
 const AirplaneBuying=require('../../models/airplaneBuying')
+<<<<<<< HEAD
 const TrainBuying=require('../../models/trainBuy.jsx')
 
+=======
+>>>>>>> 860eb8492d6f0aaaba5664bb560ac201509f560c
 const User = require('../../models/user')
 // const { dateToString } = require('../../helpers/date')
 
@@ -41,6 +44,7 @@ const trasformBuyFlight=async  flight=>{
   }
 
 }
+<<<<<<< HEAD
 const trasformBuyTrain=async  train=>{
   return{
     ...train._doc,
@@ -52,6 +56,18 @@ const trasformBuyTrain=async  train=>{
 }
 
 
+=======
+
+// const singleHotel = async hotelId =>{
+//   try{
+//     const hotel= await Hotel.findById(hotelId)
+//     return trasformHotel(hotel)
+
+//   }catch(err){
+//     throw err
+//   }
+// }
+>>>>>>> 860eb8492d6f0aaaba5664bb560ac201509f560c
 
 const singleFlight = async flightId =>{
   try{
@@ -63,6 +79,7 @@ const singleFlight = async flightId =>{
   }
 }
 
+<<<<<<< HEAD
 const singleTrain = async trainId =>{
   try{
     const train= await Train.findById(trainId)
@@ -74,6 +91,8 @@ const singleTrain = async trainId =>{
 }
 
 
+=======
+>>>>>>> 860eb8492d6f0aaaba5664bb560ac201509f560c
 
 
 
@@ -107,6 +126,7 @@ const trasformTicketFlight=async  buy=>{
     flightBuy: singleflightBuy.bind(this,buy._doc.flightBuy),    
   }
 }
+<<<<<<< HEAD
 const trasformTicketTrain=async  buy=>{
   return{
     ...buy._doc,
@@ -126,6 +146,8 @@ const singleTrainBuy = async trainBuy =>{
   }
 }
 
+=======
+>>>>>>> 860eb8492d6f0aaaba5664bb560ac201509f560c
 
 const singleflightBuy = async flightId =>{
   try{
@@ -348,6 +370,10 @@ exports.trasformRoom = trasformRoom
 exports.trasformBuyHotel=trasformBuyHotel
 exports.trasformTicketHotel=trasformTicketHotel
 exports.trasformBuyFlight=trasformBuyFlight
+<<<<<<< HEAD
 exports.trasformTicketFlight=trasformTicketFlight
 exports.trasformBuyTrain=trasformBuyTrain
 exports.trasformTicketTrain=trasformTicketTrain
+=======
+exports.trasformTicketFlight=trasformTicketFlight
+>>>>>>> 860eb8492d6f0aaaba5664bb560ac201509f560c
