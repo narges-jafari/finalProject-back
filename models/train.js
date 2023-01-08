@@ -23,26 +23,21 @@ const trainSchema = new Schema({
     required: true
 
   },
-  hallNumber:{
-    type:Number,
-    require:true
-  },
+
   // شرکت ریلی
   railCompany: {
     type: String,
     required: true
   },
-  hallType:{
-    type:String,
+
+  allowedLoggage: {
+    type: Number,
     required: true
-  },
-  hallDegree:{
-    type:Number,
-    required: true
+
   },
 
   capacity: {
-    type: String,
+    type: Number,
     required: true
 
   },
@@ -67,18 +62,22 @@ const trainSchema = new Schema({
 
   },
   price: {
-    type: String,
+    type: Number,
     required: true
 
+  },
+  hallType: {
+    type: String,
+    required: true
   },
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  seats:[{
+  seats: [{
     type: Schema.Types.ObjectId,
-    ref: 'SeatNumber'
-   }]
+    ref: 'SeatNumberTrain'
+  }]
 
 })
 module.exports = mongoose.model('Train', trainSchema)

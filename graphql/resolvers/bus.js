@@ -21,18 +21,18 @@ module.exports = {
     }
 
     const bus = new Bus({
-        originName: args.busInput.originName,
-        destinationName: args.busInput.destinationName,
-        price: args.busInput.price,
-        busCompany: args.busInput.busCompany,
-        time: args.busInput.time,
-        capacity: args.busInput.capacity,
-        busNumber: args.busInput.busNumber,
-        originTerminal: args.busInput.originTerminal,
-        destinationTerminal: args.busInput.destinationTerminal,
-        information: args.busInput.information,
-        date: dateToString(args.busInput.date),
-        creator: '62ebac44e2492fd084f4454c'
+      originName: args.busInput.originName,
+      destinationName: args.busInput.destinationName,
+      price: args.busInput.price,
+      busCompany: args.busInput.busCompany,
+      time: args.busInput.time,
+      capacity: args.busInput.capacity,
+      busNumber: args.busInput.busNumber,
+      originTerminal: args.busInput.originTerminal,
+      destinationTerminal: args.busInput.destinationTerminal,
+      information: args.busInput.information,
+      date: dateToString(args.busInput.date),
+      creator: '62ebac44e2492fd084f4454c'
     })
     let createdBus
     try {

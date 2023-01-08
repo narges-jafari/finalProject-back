@@ -2,20 +2,18 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const { graphqlHTTP } = require('express-graphql')
 const mongoose = require('mongoose')
-const {ApolloServer} = require("apollo-server-express");
+const { ApolloServer } = require('apollo-server-express')
 const {
   // ApolloServerPluginDrainHttpServer,
-  ApolloServerPluginLandingPageGraphQLPlayground,
+  ApolloServerPluginLandingPageGraphQLPlayground
 
-} = require("apollo-server-core");
-
+} = require('apollo-server-core')
 
 const typeDefs = require('./graphql/schema/index')
 const resolver = require('./graphql/resolvers/index')
 const isAuth = require('./middleware/is-auth')
 
 const app = express()
-
 
 // app.use(bodyParser.json())
 
@@ -31,50 +29,43 @@ app.use((req, res, next) => {
 
 app.use(isAuth)
 
-
-
 const corsOptions = {
   credentials: true,
-  origin: ["http://localhost:4000/graphql ", "http://localhost:3000"],
-};
-
+  origin: ['http://localhost:4000/graphql ', 'http://localhost:3000']
+}
 
 mongoose.connect(
-  "mongodb://localhost:27017/",
+  'mongodb://localhost:27017/',
   {
-    dbName: "tripno",
+    dbName: 'tripno',
     useNewUrlParser: true,
-    useUnifiedTopology: true,
+    useUnifiedTopology: true
   }
 )
 
 // schema: graphQlSchema,
 // rootValue: graphQlResolvers,
-async function startServer() {
-    const server = new ApolloServer({ schema:typeDefs, rootValue:resolver
-    ,  plugins: [
-        
-        ApolloServerPluginLandingPageGraphQLPlayground(),
-        // ApolloServerPluginDrainHttpServer()
-      ],
-      // context: async ({ req }) => {
-      //   const user = await req.isAuth
-      //   return {
-      //     user
-      //   }
-      // },
-     })
-    await server.start()
-    server.applyMiddleware({ app ,cors: corsOptions  })
-    
+async function startServer () {
+  const server = new ApolloServer({
+    schema: typeDefs,
+    rootValue: resolver,
+    plugins: [
+
+      ApolloServerPluginLandingPageGraphQLPlayground()
+      // ApolloServerPluginDrainHttpServer()
+    ]
+    // context: async ({ req }) => {
+    //   const user = await req.isAuth
+    //   return {
+    //     user
+    //   }
+    // },
+  })
+  await server.start()
+  server.applyMiddleware({ app, cors: corsOptions })
 }
 
-
-
-
-app.listen({ port: "4000" }, () => {
-    console.log("Server ready at http://localhost:4000/graphql")
-  
-});
-startServer();
-
+app.listen({ port: '4000' }, () => {
+  console.log('Server ready at http://localhost:4000/graphql')
+})
+startServer()

@@ -6,11 +6,15 @@ const hotelSchema = new Schema({
     required: true
   },
   star: {
-    type: String,
+    type: Number,
     required: true
   },
 
-  date: {
+  startDate: {
+    type: String,
+    required: true
+  },
+  endDate: {
     type: String,
     required: true
   },
@@ -28,15 +32,19 @@ const hotelSchema = new Schema({
     required: true
 
   },
-  information: {
-    type: String,
+  price: {
+    type: Number,
     required: true
 
   },
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }
+  },
+  rooms: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Room'
+  }]
 
 })
 module.exports = mongoose.model('Hotel', hotelSchema)
