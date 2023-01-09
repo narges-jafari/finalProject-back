@@ -16,6 +16,18 @@ module.exports = {
       throw err
     }
   },
+  getAllFlightBuy:async()=>{
+    const result = await AirplaneBuying.find()
+    return result.slice(-2)
+
+  },
+
+  getAllFlightTicket:async()=>{
+    const result = await FlightTicket.find()
+    return result.slice(-2)
+
+  },
+  
   searchFlight: async ({ originName, destinationName, flightClass, date }) => {
     const flight = await Flight.find({ originName, destinationName, flightClass, date })
     return flight
@@ -138,6 +150,29 @@ console.log('yes',no)
   })
   const result= await buying.save()
   return trasformBuyFlight(result)
+
+
+},
+airplaneBuys :async (args,req) =>{
+  if(!req.isAuth){
+
+  }
+const fetchFlight = await Flight.findById({_id:args.flightId})
+const fetchUser = await User.findById({_id:args.userId})
+
+const buying =new AirplaneBuying({
+  flight:fetchFlight,
+  user:fetchUser,
+ isDelete:false,
+ fullName:args.airplaneBuyInput.fullName,
+ birthDate:args.airplaneBuyInput.birthDate,
+ gendere:args.airplaneBuyInput.gendere,
+ nationalCode:args.airplaneBuyInput.nationalCode,
+ price:args.airplaneBuyInput.price,
+
+})
+const result= await buying.save()
+return trasformBuyFlight(result)
 
 
 },

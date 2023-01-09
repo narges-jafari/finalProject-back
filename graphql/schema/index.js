@@ -414,10 +414,10 @@ type RootQuery{
   allHotelTicket:[HotelTicket!]!
   getFlightSeatnumber(flight:String!,isDelete:Boolean!):[SeatNumber!]!
   getTrainSeatnumber(train:String!,isDelete:Boolean!):[SeatNumberTrain!]!
-
+  getAllFlightBuy:[AirplaneBuying!]
   searchFlightTicketById(id:ID!):FlightTicket
   searchTrainTicketById(id:ID!):TrainTicket
-
+  getAllFlightTicket:[FlightTicket!]!
   allFlightTicket:[FlightTicket!]!
   searchFlightTicketByUserId(userId:String!):[FlightTicket!]!
   searchTrainTicketByUserId(userId:String!):[TrainTicket!]!
@@ -435,6 +435,8 @@ type RootMutation{
   addRoomInfo(roomInput:RoomInput!):Room
   hotelBuy(hotelId: ID!,roomId: ID!,userId: ID!,hotelBuyInput:HotelBuyInput):HotelBuying!
   airplaneBuy(flightId: ID!,userId: ID!,airplaneBuyInput:AirplaneBuyInput):AirplaneBuying!
+  airplaneBuys(flightId: [ID!],userId: ID!,airplaneBuyInput:AirplaneBuyInput):AirplaneBuying!
+
   makeHotelTicket(hotelBuy: ID!,hotelTicketInput:HotelTicketInput):HotelTicket!
   reservedRoom(id: ID! ,isDelete: Boolean!): Room
   updateRoomCapacity(id: ID! ,capacity: Int!): Room
