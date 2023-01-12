@@ -21,6 +21,9 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Control-Type,Authorization')
+  // res.setHeader('Access-Control-Allow-Headers: *');
+
+  // res.setHeader('Access-Control-Allow-Methods: *');
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200)
   }
@@ -35,7 +38,7 @@ const corsOptions = {
 }
 
 mongoose.connect(
-  'mongodb://localhost:27017/',
+  'mongodb://127.0.0.1:27017',
   {
     dbName: 'tripno',
     useNewUrlParser: true,

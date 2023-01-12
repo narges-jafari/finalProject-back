@@ -59,6 +59,19 @@ input SeatNumberInput{
 
 }
 
+type BusSeatNumber{
+  _id: ID!
+  number:Int!
+  isDelete:Boolean!
+  bus:Bus!
+}
+
+input BusSeatNumberInput{
+  number:Int!
+  bus:String!
+}
+
+
 
 
 
@@ -127,7 +140,8 @@ type Bus{
       destinationName: String!
       price:Float!
       busCompany:String!
-      time: String!
+      departureTime: String!
+      arrivalTime: String!
       capacity:Int!
       busNumber:Int!
       originTerminal: String!
@@ -216,13 +230,15 @@ input BusInput{
       destinationName: String!
       price:Float!
       busCompany:String!
-      time: String!
+      departureTime: String!
+      arrivalTime: String!      
       capacity:Int!
       busNumber:Int!
       originTerminal: String!
       destinationTerminal: String!
       information:[String!]
       date: String!
+      creator:String!
 }
 
 input UserInput{
@@ -264,6 +280,17 @@ type AirplaneBuying{
   nationalCode:[String!]
 }
 
+type BusBuying{
+  _id:ID!
+  bus: Bus!
+  user:User!
+  price:Float!
+  isDelete:Boolean
+  fullName:[String!]
+  birthDate:[String!]
+  gendere:[String!]
+  nationalCode:[String!]
+}
 
 
 type TrainBuying{
@@ -318,6 +345,15 @@ input AirplaneBuyInput{
 }
 
 
+input BusBuyInput{
+  
+  fullName:[String!]
+  birthDate:[String!]
+  gendere:[String!]
+  nationalCode:[String!]
+  price:Float!
+}
+
 type HotelTicket{
   _id:ID!
   hotelBuy: HotelBuying!
@@ -349,6 +385,29 @@ type FlightTicket{
 }
 
 input FlightTicketInput{
+  date:String!
+  serialId:Int!
+  codeId:Int!
+  searchId:String!
+  seatnumber:[Int!]
+
+
+
+}
+
+
+type BusTicket{
+  _id:ID!
+  busBuy: BusBuying!
+  seatnumber:[Int!]
+  date:String!
+  serialId:Int!
+  codeId:Int!
+  searchId:String!
+
+}
+
+input BusTicketInput{
   date:String!
   serialId:Int!
   codeId:Int!
@@ -394,8 +453,16 @@ type RootQuery{
   user(creator:String):User!
   searchFlight(originName:String!,destinationName:String!,flightClass:String!,date:String!):[Flight]
   searchFlightbyId(id:ID!):Flight!
+  searchBusbyId(id:ID!):Bus!
+
   searchFlightbyDate(date:String!):[Flight]!
   searchFlightbyName(originName:String!):[Flight]!
+  searchBusbyName(originName:String!):[Bus]!
+
+
+  searchBus(originName:String!,destinationName:String!,date:String!):[Bus]
+
+
   searchTrain(originName:String!,destinationName:String!,hallType:String!,date:String!):[Train]
   searchTrainbyId(id:ID!):Train!
   searchTrainbyDate(date:String!):[Train]!
@@ -413,14 +480,29 @@ type RootQuery{
   searchUserById(id:ID!):User
   allHotelTicket:[HotelTicket!]!
   getFlightSeatnumber(flight:String!,isDelete:Boolean!):[SeatNumber!]!
+
+
+
+  
+  getBusSeatnumber(bus:String!,isDelete:Boolean!):[BusSeatNumber!]!
+
   getTrainSeatnumber(train:String!,isDelete:Boolean!):[SeatNumberTrain!]!
   getAllFlightBuy:[AirplaneBuying!]
+  getAllTrainBuy:[TrainBuying!]
+
   searchFlightTicketById(id:ID!):FlightTicket
+  searchBusTicketById(id:ID!):BusTicket
+
   searchTrainTicketById(id:ID!):TrainTicket
   getAllFlightTicket:[FlightTicket!]!
+  getAllBusTicket:[BusTicket!]!
+  getAllTrainTicket:[TrainTicket!]!
+
   allFlightTicket:[FlightTicket!]!
   searchFlightTicketByUserId(userId:String!):[FlightTicket!]!
   searchTrainTicketByUserId(userId:String!):[TrainTicket!]!
+  searchBusTicketByUserId(userId:String!):[BusTicket!]!
+
 
 }
 
@@ -431,21 +513,29 @@ type RootMutation{
   createUser(userInput:UserInput!) : User
   createHotel(hotelInput:HotelInput!): Hotel
   addSeatNumber(seatnumberInput:SeatNumberInput!): SeatNumber
+  addSeatNumberBus(seatnumberInputBus:BusSeatNumberInput!): BusSeatNumber
+
   addSeatNumberTrain(seatnumberTrainInput:SeatNumberTrainInput!): SeatNumberTrain
   addRoomInfo(roomInput:RoomInput!):Room
   hotelBuy(hotelId: ID!,roomId: ID!,userId: ID!,hotelBuyInput:HotelBuyInput):HotelBuying!
   airplaneBuy(flightId: ID!,userId: ID!,airplaneBuyInput:AirplaneBuyInput):AirplaneBuying!
   airplaneBuys(flightId: [ID!],userId: ID!,airplaneBuyInput:AirplaneBuyInput):AirplaneBuying!
+  busBuy(busId: ID!,userId: ID!,busBuyInput:BusBuyInput):BusBuying!
 
   makeHotelTicket(hotelBuy: ID!,hotelTicketInput:HotelTicketInput):HotelTicket!
   reservedRoom(id: ID! ,isDelete: Boolean!): Room
   updateRoomCapacity(id: ID! ,capacity: Int!): Room
   updateHotelCapacity(id: ID! ,capacity: Int!): Hotel
   makeFlightTicket(flightBuy: ID!,flightTicketInput:FlightTicketInput):FlightTicket!
+  makeBusTicket(busBuy: ID!,busTicketInput:BusTicketInput):BusTicket!
 
   reservedFlightSeat(id: [String!] ,isDelete: Boolean!):SeatNumber
+  reservedBusSeat(id: [String!] ,isDelete: Boolean!):BusSeatNumber
+
   reservedtraintSeat(id: [String!] ,isDelete: Boolean!):SeatNumberTrain
   updateFlightCapacity(id: ID! ,capacity: Int!): Flight
+  updateBusCapacity(id: ID! ,capacity: Int!): Bus
+
   updateTrainCapacity(id: ID! ,capacity: Int!): Train
   trainBuy(trainId: ID!,userId: ID!,trainBuyingInput:TrainBuyingInput):TrainBuying!
   makeTrainTicket(trainBuy: ID!,trainTicketInput:TrainTicketInput):TrainTicket!

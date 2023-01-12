@@ -6,6 +6,7 @@ const hotelResolver = require('./hotel')
 const hotelRoomResolver = require('./room')
 const seatNumberResolver = require('./seatNumber')
 const seatNumberTrainResolver = require('./trainSeatNumbers')
+const seatNumberBusResolver = require('./busSeatNumber')
 
 const rootRsolver = {
   ...authResolver,
@@ -16,6 +17,7 @@ const rootRsolver = {
   ...seatNumberResolver,
   ...seatNumberTrainResolver,
   ...hotelRoomResolver,
+  ...seatNumberBusResolver
 }
 
 module.exports = rootRsolver

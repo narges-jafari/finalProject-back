@@ -23,8 +23,10 @@ module.exports = {
   },
 
   getAllFlightTicket:async()=>{
-    const result = await FlightTicket.find()
-    return result.slice(-2)
+    const results = await FlightTicket.find()
+    return results.slice(-2).map(train => {
+      return trasformTicketFlight(train)
+    })
 
   },
   
@@ -79,7 +81,7 @@ null)
 
     const results = await FlightTicket.find({ userId })
 if(results){
-  return results.slice(-1).map(train => {
+  return results.slice(-2).map(train => {
     return trasformTicketFlight(train)
   })
 }else return(

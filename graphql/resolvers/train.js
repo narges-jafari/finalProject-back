@@ -16,6 +16,20 @@ module.exports = {
       throw err
     }
   },
+  getAllTrainBuy:async()=>{
+    const result = await TrainBuying.find()
+    return result.slice(-2)
+
+  },
+
+  getAllTrainTicket:async()=>{
+    const results = await TrainTicket.find()
+    return results.slice(-2).map(train => {
+      return trasformTicketTrain(train)
+    })
+
+  },
+
   searchTrain: async ({ originName, destinationName, hallType, date }) => {
     const train = await Train.find({ originName, destinationName, hallType, date })
     return train
@@ -56,7 +70,7 @@ null)
 
     const results = await TrainTicket.find({ userId })
 if(results){
-  return results.slice(-1).map(train => {
+  return results.slice(-2).map(train => {
     return trasformTicketTrain(train)
   })
 }else return(

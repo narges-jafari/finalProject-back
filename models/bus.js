@@ -17,13 +17,18 @@ const busSchema = new Schema({
     type: String,
     required: true
   },
-  time: {
+  departureTime: {
+    type: String,
+    required: true
+
+  },
+  arrivalTime: {
     type: String,
     required: true
 
   },
   capacity: {
-    type: String,
+    type: Number,
     required: true
 
   },
@@ -43,15 +48,19 @@ const busSchema = new Schema({
 
   },
   information: {
-    type: String,
+    type: Object,
     required: true
 
   },
   price: {
-    type: String,
+    type: Number,
     required: true
 
   },
+  seats: [{
+    type: Schema.Types.ObjectId,
+    ref: 'BusSeatNumber'
+  }],
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'User'
