@@ -258,6 +258,7 @@ type HotelBuying{
   birthDate:[String!]
   gendere:[String!]
   nationalCode:[String!]
+  price:Float!
 }
 
 input HotelBuyInput{
@@ -266,6 +267,8 @@ input HotelBuyInput{
   birthDate:[String!]
   gendere:[String!]
   nationalCode:[String!]
+  price:Float!
+
 }
 
 type AirplaneBuying{
@@ -502,6 +505,18 @@ type RootQuery{
   searchFlightTicketByUserId(userId:String!):[FlightTicket!]!
   searchTrainTicketByUserId(userId:String!):[TrainTicket!]!
   searchBusTicketByUserId(userId:String!):[BusTicket!]!
+
+
+  allBusTicketbyDate(date:String!):[BusTicket!]!
+  allTrainTicketbyDate(date:String!):[TrainTicket!]!
+  allHotelTicketbyDate(date:String!):[HotelTicket!]!
+  allFlightTicketbyDate(date:String!):[FlightTicket!]!
+  searchAllBusTicke:[BusTicket!]!
+  searchAllFlightTicke:[FlightTicket!]!
+  searchAllTrainTicke:[TrainTicket!]!
+  searchAllHotelTicke:[HotelTicket!]!
+
+
 
 
 }

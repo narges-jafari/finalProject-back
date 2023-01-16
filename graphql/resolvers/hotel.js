@@ -95,6 +95,24 @@ if(results){
       throw err
     }
   },
+  allHotelTicketbyDate: async ({ date }) => {
+    try {
+      const results = await HotelTicket.find({ date })
+      return results.map(bus => {
+        return trasformTicketHotel(bus)
+      })
+    } catch (err) {
+      throw err
+    }
+  },  
+
+  searchAllHotelTicke:async()=>{
+    const results = await HotelTicket.find()
+    return results.map(train => {
+      return trasformTicketHotel(train)
+    })
+  
+  },
 
 
   createHotel: async (args, req) => {
@@ -145,6 +163,8 @@ if(results){
    birthDate:args.hotelBuyInput.birthDate,
    gendere:args.hotelBuyInput.gendere,
    nationalCode:args.hotelBuyInput.nationalCode,
+   price:args.hotelBuyInput.price,
+
 
   })
   const result= await buying.save()

@@ -29,6 +29,25 @@ module.exports = {
     })
 
   },
+
+  searchAllFlightTicke:async()=>{
+    const results = await FlightTicket.find()
+    return results.map(train => {
+      return trasformTicketFlight(train)
+    })
+  
+  },
+
+  allFlightTicketbyDate: async ({ date }) => {
+    try {
+      const results = await FlightTicket.find({ date })
+      return results.map(bus => {
+        return trasformTicketFlight(bus)
+      })
+    } catch (err) {
+      throw err
+    }
+  },  
   
   searchFlight: async ({ originName, destinationName, flightClass, date }) => {
     const flight = await Flight.find({ originName, destinationName, flightClass, date })

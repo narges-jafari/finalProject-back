@@ -21,6 +21,10 @@ const hotelBuyingSchema = new Schema({
     type: Object,
     required: true
   },
+  price: {
+    type: Number,
+    required: true
+  },
   room: {
     type: Schema.Types.ObjectId,
     ref: 'Room'

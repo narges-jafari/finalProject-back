@@ -78,6 +78,27 @@ console.log('yes',no)
 )
       
     },
+
+
+    searchAllTrainTicke:async()=>{
+      const results = await TrainTicket.find()
+      return results.map(train => {
+        return trasformTicketTrain(train)
+      })
+    
+    },
+
+allTrainTicketbyDate: async ({ date }) => {
+      try {
+        const results = await TrainTicket.find({ date })
+        return results.map(bus => {
+          return trasformTicketTrain(bus)
+        })
+      } catch (err) {
+        throw err
+      }
+    },  
+     
   searchTrainbyName: async ({ originName }) => {
     try {
       const trains = await Train.find({ originName })

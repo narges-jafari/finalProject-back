@@ -132,6 +132,14 @@ getAllBusTicket:async()=>{
 
 },
 
+searchAllBusTicke:async()=>{
+  const results = await BusTicket.find()
+  return results.map(train => {
+    return trasformTicketBus(train)
+  })
+
+},
+
 searchBusTicketByUserId: async ({userId}) => {
 
   const results = await BusTicket.find({ userId })
@@ -144,6 +152,16 @@ console.log('yes',no)
 )
     
   },
+allBusTicketbyDate: async ({ date }) => {
+    try {
+      const buses = await BusTicket.find({ date })
+      return buses.map(bus => {
+        return trasformTicketBus(bus)
+      })
+    } catch (err) {
+      throw err
+    }
+  },  
 
 
 makeBusTicket :async (args,req) =>{
